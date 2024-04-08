@@ -40,6 +40,7 @@ function App() {
             onChange={handleChange}
           />
         </div>
+        {errors?.email && <div style={{ color: 'red' }}>{errors.email}</div>}
         <div>
           <label htmlFor="password">パスワード</label>
           <input
@@ -50,6 +51,7 @@ function App() {
             type="password"
           />
         </div>
+        {errors?.password && <div style={{ color: 'red' }}>{errors.password}</div>}
         <div>
           <button type="submit">ログイン</button>
         </div>
