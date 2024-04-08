@@ -1,11 +1,16 @@
 import './App.css';
 import { useState } from 'react';
+import { z } from 'zod';
 
 function App() {
-  const [data, setData] = useState({ email: '', password: '' });
+  const [data, setData]
+    = useState({ email: '', password: '' });
+
+  const mySchema = z.string().min(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    mySchema.parse(data.email);
     console.log(data);
   };
 
