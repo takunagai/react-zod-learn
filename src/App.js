@@ -8,8 +8,10 @@ function App() {
   const [errors, setErrors] = useState(null);
 
   const FormData = z.object({
-    email: z.string().email(),
-    password: z.string().min(8).max(32),
+    email: z.string().email({ message: 'メールアドレスの形式が正しくありません' }),
+    password: z.string()
+      .min(8, { message: 'パスワードは8文字以上で入力してください' })
+      .max(32, { message: 'パスワードは32文字以下で入力してください' }),
   });
 
   const handleSubmit = (e) => {
