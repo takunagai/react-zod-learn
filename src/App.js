@@ -5,6 +5,7 @@ import { z } from 'zod';
 function App() {
   const [data, setData]
     = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState(null);
 
   const FormData = z.object({
     email: z.string().email(),
@@ -16,7 +17,7 @@ function App() {
     try {
       FormData.parse(data);
     } catch (e) {
-      console.log(e.flatten());
+      setErrors(e.flatten().fieldErrors);
     }
     console.log(data);
   };
