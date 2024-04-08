@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { z, ZodError } from 'zod';
+import { z } from 'zod';
 
 function App() {
   const [data, setData]
@@ -16,16 +16,10 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      FormData.parse(data);
-    } catch (e) {
-      if (e instanceof ZodError) {
-        setErrors(e.flatten().fieldErrors);
-      } else {
-        console.log(e);
-      }
-
-    }
+    const result = FormData.safeParse(data);
+    const errors = result.success ? {} :
+      result.error.flatten().fieldErrors;
+    setErrors(errors);
     console.log(data);
   };
 
