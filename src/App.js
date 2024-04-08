@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { z } from 'zod';
+import { z, ZodError } from 'zod';
 
 function App() {
   const [data, setData]
@@ -17,7 +17,12 @@ function App() {
     try {
       FormData.parse(data);
     } catch (e) {
-      setErrors(e.flatten().fieldErrors);
+      if (e instanceof ZodError) {
+        setErrors(e.flatten().fieldErrors);
+      } else {
+        console.log(e);
+      }
+
     }
     console.log(data);
   };
