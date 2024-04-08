@@ -6,12 +6,14 @@ function App() {
   const [data, setData]
     = useState({ email: '', password: '' });
 
-  const mySchema = z.string().min(1);
+  const FormData = z.object({
+    email: z.string().email(),
+    password: z.string().min(8).max(32),
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const result = mySchema.safeParse(data.email);
-    console.log(result);
+    FormData.parse(data);
     console.log(data);
   };
 
