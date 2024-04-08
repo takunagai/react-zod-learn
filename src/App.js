@@ -10,7 +10,8 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mySchema.parse(data.email);
+    const result = mySchema.safeParse(data.email);
+    console.log(result);
     console.log(data);
   };
 
