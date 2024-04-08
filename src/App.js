@@ -13,7 +13,11 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    FormData.parse(data);
+    try {
+      FormData.parse(data);
+    } catch (e) {
+      console.log(e.flatten());
+    }
     console.log(data);
   };
 
